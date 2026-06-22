@@ -1,11 +1,20 @@
-import ProductReviews from "./components/ProductReviews";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
+  const token = localStorage.getItem("adminToken");
+
   return (
-    <div>
-      <h1>Shopping Cart Project</h1>
-      <ProductReviews productId="12345" />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route
+          path="/dashboard"
+          element={token ? <Dashboard /> : <Navigate to="/" />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
